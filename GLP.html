@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gregory-Leibniz π Visualization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            margin: 20px 0;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gregory-Leibniz π Visualization</h1>
+    <div class="controls">
+        <label for="terms">Number of Terms:</label>
+        <input type="number" id="terms" value="10" min="1" step="1">
+        <button id="simulate">Simulate</button>
+    </div>
+    <canvas id="canvas" width="800" height="400"></canvas>
+    <p id="result"></p>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const resultText = document.getElementById('result');
+        const termsInput = document.getElementById('terms');
+        const simulateButton = document.getElementById('simulate');
+
+        // Draw axes
+        function drawAxes() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = '#ddd';
+            ctx.lineWidth = 1;
+
+            // X-axis
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height / 2);
+            ctx.lineTo(canvas.width, canvas.height / 2);
+            ctx.stroke();
+
+            // Y-axis
+            ctx.beginPath();
+            ctx.moveTo(50, 0);
+            ctx.lineTo(50, canvas.height);
+            ctx.stroke();
+        }
+
+        // Approximate π using the Gregory-Leibniz series
+        function approximatePi(terms) {
+            let pi = 0;
+            const points = [];
+
+            for (let i = 0; i < terms; i++) {
+                const term = (i % 2 === 0 ? 1 : -1) / (2 * i + 1);
+                pi += term;
+                points.push({ x: i, y: pi * 4 }); // Multiply by 4 to estimate π
+            }
+
+            return points;
+        }
+
+        // Plot the approximation
+        function plot(points) {
+            drawAxes();
+            ctx.strokeStyle = 'blue';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+
+            const scaleX = (canvas.width - 100) / points.length;
+            const scaleY = canvas.height / 2 / Math.PI;
+
+            points.forEach((point, index) => {
+                const x = 50 + point.x * scaleX;
+                const y = canvas.height / 2 - point.y * scaleY;
+                if (index === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            });
+
+            ctx.stroke();
+
+            // Draw target line for π
+            ctx.strokeStyle = 'red';
+            ctx.beginPath();
+            const targetY = canvas.height / 2 - Math.PI * scaleY;
+            ctx.moveTo(50, targetY);
+            ctx.lineTo(canvas.width, targetY);
+            ctx.stroke();
+        }
+
+        // Run simulation
+        simulateButton.addEventListener('click', () => {
+            const terms = parseInt(termsInput.value, 10);
+            if (terms > 0) {
+                const points = approximatePi(terms);
+                plot(points);
+                const lastPi = points[points.length - 1].y;
+                resultText.textContent = `Approximation after ${terms} terms: π ≈ ${lastPi.toFixed(6)}`;
+            } else {
+                alert('Please enter a valid number of terms.');
+            }
+        });
+
+        // Initial render
+        drawAxes();
+    </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buffon's Needle Simulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            margin: 20px 0;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Buffon's Needle Simulation</h1>
+    <div class="controls">
+        <label for="needleCount">Number of Needles:</label>
+        <input type="number" id="needleCount" value="1000" min="1" step="1">
+        <button id="simulate">Simulate</button>
+    </div>
+    <canvas id="canvas" width="800" height="400"></canvas>
+    <p id="result"></p>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const resultText = document.getElementById('result');
+        const needleCountInput = document.getElementById('needleCount');
+        const simulateButton = document.getElementById('simulate');
+
+        const lineSpacing = 40; // Spacing between parallel lines
+        const needleLength = 30; // Length of the needle
+
+        function drawLines() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = '#ddd';
+            ctx.lineWidth = 2;
+            for (let y = lineSpacing; y < canvas.height; y += lineSpacing) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+        }
+
+        function random(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        function throwNeedle() {
+            const x = random(needleLength / 2, canvas.width - needleLength / 2);
+            const y = random(needleLength / 2, canvas.height - needleLength / 2);
+            const angle = random(0, Math.PI);
+            const x1 = x - (needleLength / 2) * Math.cos(angle);
+            const x2 = x + (needleLength / 2) * Math.cos(angle);
+            const y1 = y - (needleLength / 2) * Math.sin(angle);
+            const y2 = y + (needleLength / 2) * Math.sin(angle);
+
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+
+            // Check if needle crosses a line
+            const crossesLine = Math.floor(y1 / lineSpacing) !== Math.floor(y2 / lineSpacing);
+            return crossesLine;
+        }
+
+        function simulateNeedles(needleCount) {
+            drawLines();
+            let crosses = 0;
+
+            for (let i = 0; i < needleCount; i++) {
+                if (throwNeedle()) {
+                    crosses++;
+                }
+            }
+
+            // Estimate Pi using Buffon's formula
+            const piEstimate = (2 * needleLength * needleCount) / (crosses * lineSpacing);
+            resultText.textContent = `Estimated π: ${crosses > 0 ? piEstimate.toFixed(6) : 'Infinity'} (Crosses: ${crosses}, Total: ${needleCount})`;
+        }
+
+        simulateButton.addEventListener('click', () => {
+            const needleCount = parseInt(needleCountInput.value, 10);
+            if (needleCount > 0) {
+                simulateNeedles(needleCount);
+            } else {
+                alert('Please enter a valid number of needles.');
+            }
+        });
+
+        // Initial render
+        drawLines();
+    </script>
+</body>
+</html>

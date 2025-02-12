@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monte Carlo Simulation for π</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            margin: 20px 0;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Monte Carlo Simulation for π</h1>
+    <div class="controls">
+        <label for="pointCount">Number of Points:</label>
+        <input type="number" id="pointCount" value="1000" min="1" step="1">
+        <button id="simulate">Simulate</button>
+    </div>
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <p id="result"></p>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const resultText = document.getElementById('result');
+        const pointCountInput = document.getElementById('pointCount');
+        const simulateButton = document.getElementById('simulate');
+
+        const radius = canvas.width / 2; // Circle radius
+        const centerX = radius; // Circle center X
+        const centerY = radius; // Circle center Y
+
+        function drawCircle() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw the square
+            ctx.strokeStyle = '#ddd';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+            // Draw the circle
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+            ctx.stroke();
+        }
+
+        function randomPoint() {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height;
+            return { x, y };
+        }
+
+        function isInsideCircle(x, y) {
+            const dx = x - centerX;
+            const dy = y - centerY;
+            return dx * dx + dy * dy <= radius * radius;
+        }
+
+        function simulatePoints(pointCount) {
+            drawCircle();
+
+            let insideCircle = 0;
+
+            for (let i = 0; i < pointCount; i++) {
+                const { x, y } = randomPoint();
+                const inside = isInsideCircle(x, y);
+
+                ctx.fillStyle = inside ? 'green' : 'red';
+                ctx.fillRect(x, y, 2, 2);
+
+                if (inside) insideCircle++;
+            }
+
+            // Estimate π
+            const piEstimate = (insideCircle / pointCount) * 4;
+            resultText.textContent = `Estimated π: ${piEstimate.toFixed(6)} (Inside: ${insideCircle}, Total: ${pointCount})`;
+        }
+
+        simulateButton.addEventListener('click', () => {
+            const pointCount = parseInt(pointCountInput.value, 10);
+            if (pointCount > 0) {
+                simulatePoints(pointCount);
+            } else {
+                alert('Please enter a valid number of points.');
+            }
+        });
+
+        // Initial render
+        drawCircle();
+    </script>
+</body>
+</html>
