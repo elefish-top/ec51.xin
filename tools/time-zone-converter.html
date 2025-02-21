@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>时区转换器 - E事无忧</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header>
+    <h1>E事无忧</h1>
+    <p>一站式在线工具平台</p>
+  </header>
+  <nav>
+    <a href="../index.html">首页</a>
+    <a href="../tools.html">工具</a>
+    <a href="../contact.html">联系我们</a>
+  </nav>
+  <main>
+    <h2>时区转换器</h2>
+    <p>选择时区进行时间转换：</p>
+    <input type="datetime-local" id="datetimeInput">
+    <select id="fromTimeZone">
+      <option value="UTC">UTC</option>
+      <option value="Asia/Shanghai">中国标准时间 (CST)</option>
+      <option value="America/New_York">美国东部时间 (EST)</option>
+      <!-- 可以添加更多时区 -->
+    </select>
+    <select id="toTimeZone">
+      <option value="UTC">UTC</option>
+      <option value="Asia/Shanghai">中国标准时间 (CST)</option>
+      <option value="America/New_York">美国东部时间 (EST)</option>
+      <!-- 可以添加更多时区 -->
+    </select>
+    <button onclick="convertTimeZone()">转换</button>
+    <p>转换结果：<span id="conversionResult"></span></p>
+  </main>
+  <footer>
+    <p>&copy; 2025 E事无忧. All rights reserved.</p>
+  </footer>
+  <script>
+    function convertTimeZone() {
+      const datetime = document.getElementById('datetimeInput').value;
+      const fromTimeZone = document.getElementById('fromTimeZone').value;
+      const toTimeZone = document.getElementById('toTimeZone').value;
+      if (!datetime) {
+        document.getElementById('conversionResult').innerText = '请输入有效的日期和时间';
+        return;
+      }
+      const date = new Date(datetime);
+      const fromOffset = new Date().toLocaleString('en-US', { timeZone: fromTimeZone }).split(' ')[1];
+      const toOffset = new Date().toLocaleString('en-US', { timeZone: toTimeZone }).split(' ')[1];
+      const convertedDate = new Date(date.getTime() + (toOffset - fromOffset) * 60 * 60 * 1000);
+      document.getElementById('conversionResult').innerText = convertedDate.toLocaleString();
+    }
+  </script>
+</body>
+</html>
+``

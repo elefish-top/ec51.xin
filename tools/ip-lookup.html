@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IP查询 - E事无忧</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header>
+    <h1>E事无忧</h1>
+    <p>一站式在线工具平台</p>
+  </header>
+  <nav>
+    <a href="../index.html">首页</a>
+    <a href="../tools.html">工具</a>
+    <a href="../contact.html">联系我们</a>
+  </nav>
+  <main>
+    <h2>IP查询</h2>
+    <p>输入IP地址，查询其详细信息：</p>
+    <div class="tool-container">
+      <div class="tool-item">
+        <div class="tool-title">IP查询</div>
+        <div class="tool-description">显示IP的各种信息</div>
+        <input type="text" id="ipInput" placeholder="输入IP地址">
+        <button onclick="lookupIP()">查询</button>
+        <div id="ipResult"></div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2025 E事无忧. All rights reserved. <a href="http://wapmz.com/in/205"><img src="http://wapmz.com/cn/small/205" alt="wapmz.com"></a></p>
+  </footer>
+  <script>
+    async function lookupIP() {
+      const ip = document.getElementById('ipInput').value;
+      const response = await fetch(`https://ipapi.co/${ip}/json/`);
+      const data = await response.json();
+      document.getElementById('ipResult').innerHTML = `
+        <p><strong>IP:</strong> ${data.ip}</p>
+        <p><strong>城市:</strong> ${data.city}</p>
+        <p><strong>地区:</strong> ${data.region}</p>
+        <p><strong>国家:</strong> ${data.country_name}</p>
+        <p><strong>邮编:</strong> ${data.postal}</p>
+        <p><strong>时区:</strong> ${data.timezone}</p>
+        <p><strong>ISP:</strong> ${data.org}</p>
+      `;
+    }
+
+    async function detectIP() {
+      const response = await fetch('https://ipapi.co/json/');
+      const data = await response.json();
+      document.getElementById('ipInput').value = data.ip;
+    }
+
+    window.onload = detectIP;
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>温度转换器 - E事无忧</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header>
+    <h1>E事无忧</h1>
+    <p>一站式在线工具平台</p>
+  </header>
+  <nav>
+    <a href="../index.html">首页</a>
+    <a href="../tools.html">工具</a>
+    <a href="../contact.html">联系我们</a>
+  </nav>
+  <main>
+    <h2>温度转换器</h2>
+    <p>输入温度进行转换：</p>
+    <input type="number" id="temperatureInput" placeholder="输入温度">
+    <select id="temperatureUnit">
+      <option value="C">摄氏度</option>
+      <option value="F">华氏度</option>
+    </select>
+    <button onclick="convertTemperature()">转换</button>
+    <p>转换结果：<span id="conversionResult"></span></p>
+  </main>
+  <footer>
+    <p>&copy; 2025 E事无忧. All rights reserved.</p>
+  </footer>
+  <script>
+    function convertTemperature() {
+      const temp = parseFloat(document.getElementById('temperatureInput').value);
+      const unit = document.getElementById('temperatureUnit').value;
+      if (isNaN(temp)) {
+        document.getElementById('conversionResult').innerText = '请输入有效的温度';
+        return;
+      }
+      let result;
+      if (unit === 'C') {
+        result = (temp * 9/5) + 32 + ' °F';
+      } else {
+        result = (temp - 32) * 5/9 + ' °C';
+      }
+      document.getElementById('conversionResult').innerText = result;
+    }
+  </script>
+</body>
+</html>

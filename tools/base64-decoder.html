@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Base64解码器 - E事无忧</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header>
+    <h1>E事无忧</h1>
+    <p>一站式在线工具平台</p>
+  </header>
+  <nav>
+    <a href="../index.html">首页</a>
+    <a href="../tools.html">工具</a>
+    <a href="../contact.html">联系我们</a>
+  </nav>
+  <main>
+    <h2>Base64解码器</h2>
+    <p>输入Base64编码进行解码：</p>
+    <textarea id="encodedInput" placeholder="输入Base64编码"></textarea>
+    <button onclick="decodeBase64()">解码</button>
+    <p>解码结果：</p>
+    <textarea id="decodedText" readonly></textarea>
+  </main>
+  <footer>
+    <p>&copy; 2025 E事无忧. All rights reserved.</p>
+  </footer>
+  <script>
+    function decodeBase64() {
+      const encodedText = document.getElementById('encodedInput').value;
+      const decodedText = atob(encodedText);
+      document.getElementById('decodedText').value = decodedText;
+    }
+  </script>
+</body>
+</html>

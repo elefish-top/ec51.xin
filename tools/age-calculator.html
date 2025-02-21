@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>年龄计算器 - E事无忧</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header>
+    <h1>E事无忧</h1>
+    <p>一站式在线工具平台</p>
+  </header>
+  <nav>
+    <a href="../index.html">首页</a>
+    <a href="../tools.html">工具</a>
+    <a href="../contact.html">联系我们</a>
+  </nav>
+  <main>
+    <h2>年龄计算器</h2>
+    <p>计算您的年龄：</p>
+    <div class="tool-container">
+      <div class="tool-item">
+        <div class="tool-title">年龄计算器</div>
+        <div class="tool-description">计算您的年龄</div>
+        <input type="date" id="birthDate">
+        <button onclick="calculateAge()">计算</button>
+        <input type="text" id="ageResult" disabled>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2025 E事无忧. All rights reserved. <a href="http://wapmz.com/in/205"><img src="http://wapmz.com/cn/small/205" alt="wapmz.com"></a></p>
+  </footer>
+  <script>
+    function calculateAge() {
+      let birthDate = new Date(document.getElementById('birthDate').value);
+      let today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      let monthDifference = today.getMonth() - birthDate.getMonth();
+      if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      document.getElementById('ageResult').value = age;
+    }
+  </script>
+</body>
+</html>

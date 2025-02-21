@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>二维码生成器 - E事无忧</title>
+  <link rel="stylesheet" href="../styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>E事无忧</h1>
+    <p>一站式在线工具平台</p>
+  </header>
+  <nav>
+    <a href="../index.html">首页</a>
+    <a href="../tools.html">工具</a>
+    <a href="../contact.html">联系我们</a>
+  </nav>
+  <main>
+    <h2>二维码生成器</h2>
+    <p>输入文本生成二维码：</p>
+    <input type="text" id="qrText" placeholder="输入文本">
+    <button onclick="generateQRCode()">生成二维码</button>
+    <div id="qrCode"></div>
+  </main>
+  <footer>
+    <p>&copy; 2025 E事无忧. All rights reserved.</p>
+  </footer>
+  <script>
+    function generateQRCode() {
+      const qrText = document.getElementById('qrText').value;
+      const qrCodeContainer = document.getElementById('qrCode');
+      qrCodeContainer.innerHTML = '';
+      QRCode.toCanvas(qrText, { errorCorrectionLevel: 'H' }, function (err, canvas) {
+        if (err) console.error(err);
+        qrCodeContainer.appendChild(canvas);
+      });
+    }
+  </script>
+</body>
+</html>

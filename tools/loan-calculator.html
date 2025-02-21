@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>贷款计算器 - E事无忧</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header>
+    <h1>E事无忧</h1>
+    <p>一站式在线工具平台</p>
+  </header>
+  <nav>
+    <a href="../index.html">首页</a>
+    <a href="../tools.html">工具</a>
+    <a href="../contact.html">联系我们</a>
+  </nav>
+  <main>
+    <h2>贷款计算器</h2>
+    <p>输入贷款金额、年利率和贷款期限计算月供和总利息：</p>
+    <input type="number" id="loanAmount" placeholder="贷款金额">
+    <input type="number" id="annualInterestRate" placeholder="年利率 (%)">
+    <input type="number" id="loanTerm" placeholder="贷款期限 (年)">
+    <button onclick="calculateLoan()">计算</button>
+    <p>月供：<span id="monthlyPayment">0</span> 元</p>
+    <p>总利息：<span id="totalInterest">0</span> 元</p>
+  </main>
+  <footer>
+    <p>&copy; 2025 E事无忧. All rights reserved.</p>
+  </footer>
+  <script>
+    function calculateLoan() {
+      const loanAmount = parseFloat(document.getElementById('loanAmount').value);
+      const annualInterestRate = parseFloat(document.getElementById('annualInterestRate').value) / 100;
+      const loanTerm = parseFloat(document.getElementById('loanTerm').value);
+      if (isNaN(loanAmount) || isNaN(annualInterestRate) || isNaN(loanTerm)) {
+        alert('请输入有效的数值');
+        return;
+      }
+      const monthlyInterestRate = annualInterestRate / 12;
+      const numberOfPayments = loanTerm * 12;
+      const monthlyPayment = (loanAmount * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments));
+      const totalInterest = (monthlyPayment * numberOfPayments) - loanAmount;
+      document.getElementById('monthlyPayment').innerText = monthlyPayment.toFixed(2);
+      document.getElementById('totalInterest').innerText = totalInterest.toFixed(2);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>罗马数字转换器 - E事无忧</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header>
+    <h1>E事无忧</h1>
+    <p>一站式在线工具平台</p>
+  </header>
+  <nav>
+    <a href="../index.html">首页</a>
+    <a href="../tools.html">工具</a>
+    <a href="../contact.html">联系我们</a>
+  </nav>
+  <main>
+    <h2>罗马数字转换器</h2>
+    <p>输入阿拉伯数字或罗马数字进行转换：</p>
+    <input type="text" id="numberInput" placeholder="输入数字">
+    <button onclick="convertToRoman()">转换为罗马数字</button>
+    <button onclick="convertToArabic()">转换为阿拉伯数字</button>
+    <p>转换结果：<span id="conversionResult"></span></p>
+  </main>
+  <footer>
+    <p>&copy; 2025 E事无忧. All rights reserved.</p>
+  </footer>
+  <script>
+    function convertToRoman() {
+      const num = parseInt(document.getElementById('numberInput').value);
+      if (isNaN(num)) {
+        document.getElementById('conversionResult').innerText = '请输入有效的数字';
+        return;
+      }
+      const romanNumerals = [
+        { value: 1000, numeral: 'M' },
+        { value: 900, numeral: 'CM' },
+        { value: 500, numeral: 'D' },
+        { value: 400, numeral: 'CD' },
+        { value: 100, numeral: 'C' },
+        { value: 90, numeral: 'XC' },
+        { value: 50, numeral: 'L' },
+        { value: 40, numeral: 'XL' },
+        { value: 10, numeral: 'X' },
+        { value: 9, numeral: 'IX' },
+        { value: 5, numeral: 'V' },
+        { value: 4, numeral: 'IV' },
+        { value: 1, numeral: 'I' }
+      ];
+      let result = '';
+      romanNumerals.forEach(({ value, numeral }) => {
+        while (num >= value) {
+          result += numeral;
+          num -= value;
+        }
+      });
+      document.getElementById('conversionResult').innerText = result;
+    }
+
+    function convertToArabic() {
+      const roman = document.getElementById('numberInput').value.toUpperCase();
+      const romanNumerals = {
+        M: 1000,
+        CM: 900,
+        D: 500,
+        CD: 400,
+        C: 100,
+        XC: 90,
+        L: 50,
+        XL: 40,
+        X: 10,
+        IX: 9,
+        V: 5,
+        IV: 4,
+        I: 1
+      };
+      let result = 0;
+      for (let i = 0; i < roman.length; i++) {
+        const current = romanNumerals[roman[i]];
+        const next = romanNumerals[roman[i + 1]];
+        if (next && current < next) {
+          result += next - current;
+          i++;
+        } else {
+          result += current;
+        }
+      }
+      document.getElementById('conversionResult').innerText = result;
+    }
+  </script>
+</body>
+</html>

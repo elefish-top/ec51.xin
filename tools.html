@@ -5,75 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>工具 - E事无忧</title>
   <link rel="icon" href="favicon.ico">
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      color: #333;
-    }
-    header {
-      background-color: #4CAF50;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-    }
-    nav {
-      background: #fff;
-      padding: 10px;
-      text-align: center;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    nav a {
-      margin: 0 15px;
-      text-decoration: none;
-      color: #4CAF50;
-    }
-    main {
-      padding: 20px;
-      max-width: 800px;
-      margin: 20px auto;
-      background: #fff;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    footer {
-      text-align: center;
-      padding: 15px;
-      background: #eee;
-      color: #666;
-    }
-    .tool-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      justify-items: center;
-    }
-    .tool-item {
-      width: 200px;
-      text-align: center;
-      background-color: #4CAF50;
-      border-radius: 5px;
-      color: white;
-      padding: 20px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      transition: background-color 0.3s, transform 0.2s;
-    }
-    .tool-item:hover {
-      background-color: #45a049;
-      transform: translateY(-3px);
-    }
-    .tool-title {
-      font-size: 16px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    .tool-description {
-      font-size: 12px;
-      color: #f0f0f0;
-      margin-top: 5px;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
@@ -90,39 +22,129 @@
     <p>选择以下工具，快速解决您的问题：</p>
     <div class="tool-container">
       <div class="tool-item">
-        <a href="tools/calculator.html">
+        <a href="tools/calculator.html" style="color: #45a049;">
           <div class="tool-title">计算器</div>
           <div class="tool-description">快速进行加减乘除计算</div>
         </a>
       </div>
       <div class="tool-item">
-        <a href="tools/unit-converter.html">
+        <a href="tools/unit-converter.html" style="color: #45a049;">
           <div class="tool-title">单位转换</div>
           <div class="tool-description">轻松转换长度、重量等单位</div>
         </a>
       </div>
       <div class="tool-item">
-        <a href="tools/date-calculator.html">
+        <a href="tools/date-calculator.html" style="color: #45a049;">
           <div class="tool-title">日期计算器</div>
           <div class="tool-description">计算两个日期间的天数</div>
         </a>
       </div>
       <div class="tool-item">
-        <a href="tools/password-generator.html">
+        <a href="tools/password-generator.html" style="color: #45a049;">
           <div class="tool-title">密码生成器</div>
           <div class="tool-description">生成强密码，保障账号安全</div>
         </a>
       </div>
       <div class="tool-item">
-        <a href="tools/text-comparator.html">
+        <a href="tools/text-comparator.html" style="color: #45a049;">
           <div class="tool-title">文本对比工具</div>
           <div class="tool-description">快速对比两段文本差异</div>
         </a>
       </div>
       <div class="tool-item">
-        <a href="tools/color-converter.html">
+        <a href="tools/color-converter.html" style="color: #45a049;">
           <div class="tool-title">颜色转换</div>
           <div class="tool-description">RGB与HEX颜色代码转换</div>
+        </a>
+      </div>
+      <div class="tool-item">
+        <a href="tools/bmi-calculator.html" style="color: #45a049;">
+          <div class="tool-title">BMI计算器</div>
+          <div class="tool-description">计算您的身体质量指数（BMI）</div>
+        </a>
+      </div>
+      <div class="tool-item">
+        <a href="tools/age-calculator.html" style="color: #45a049;">
+          <div class="tool-title">年龄计算器</div>
+          <div class="tool-description">计算您的年龄</div>
+        </a>
+      </div>
+      <div class="tool-item">
+        <a href="tools/ip-lookup.html" style="color: #45a049;">
+          <div class="tool-title">IP查询</div>
+          <div class="tool-description">显示IP的各种信息</div>
+        </a>
+      </div>
+      <div class="tool-item">
+        <a href="tools/markdown-to-html.html" style="color: #45a049;">
+          <div class="tool-title">Markdown转HTML</div>
+          <div class="tool-description">将Markdown文本转换为HTML</div>
+        </a>
+      </div>
+      <div class="tool-item">
+        <a href="tools/json-formatter.html" style="color: #45a049;">
+          <div class="tool-title">JSON格式化</div>
+          <div class="tool-description">格式化JSON文本</div>
+        </a>
+      </div>
+      <div class="tool-item">
+        <a href="tools/qr-code-generator.html" style="color: #45a049;">
+          <div class="tool-title">二维码生成器</div>
+          <div class="tool-description">生成自定义二维码</div>
+        </a>
+      </div>
+      <div class="tool-item">
+        <a href="tools/word-counter.html" style="color: #45a049;">
+          <div class="tool-title">字数统计</div>
+          <div class="tool-description">统计文本中的字数和字符数</div>
+        </a>
+      </div>
+      <div class="tool-item">
+        <a href="tools/base64-encoder.html" style="color: #45a049;">
+          <div class="tool-title">Base64编码器</div>
+          <div class="tool-description">将文本转换为Base64编码</div>
+        </a>
+      </div>
+      <div class="tool-item">
+        <a href="tools/base64-decoder.html" style="color: #45a049;">
+          <div class="tool-title">Base64解码器</div>
+          <div class="tool-description">将Base64编码转换为文本</div>
+        </a>
+      </div>
+      <div class="tool-item">
+        <a href="tools/url-encoder.html" style="color: #45a049;">
+          <div class="tool-title">URL编码器</div>
+          <div class="tool-description">将文本转换为URL编码</div>
+        </a>
+      </div>
+      <div class="tool-item">
+        <a href="tools/url-decoder.html" style="color: #45a049;">
+          <div class="tool-title">URL解码器</div>
+          <div class="tool-description">将URL编码转换为文本</div>
+        </a>
+      </div>
+      <div class="tool-item">
+        <a href="tools/roman-numeral-converter.html" style="color: #45a049;">
+          <div class="tool-title">罗马数字转换器</div>
+          <div class="tool-description">阿拉伯数字与罗马数字相互转换</div>
+        </a>
+      </div>
+      <div class="tool-item">
+        <a href="tools/temperature-converter.html" style="color: #45a049;">
+          <div class="tool-title">温度转换器</div>
+          <div class="tool-description">摄氏度与华氏度相互转换</div>
+        </a>
+      </div>
+      <div class="tool-item">
+        <a href="tools/time-zone-converter.html" style="color: #45a049;">
+          <div class="tool-title">时区转换器</div>
+          <div class="tool-description">不同时间区域时间转换</div>
+        </a>
+      </div>
+      <div class="tool-item">
+        <a href="tools/loan-calculator.html" style="color: #45a049;">
+          <div class="tool-title">贷款计算器</div>
+          <div class="tool-description">计算贷款的月供和总利息</div>
         </a>
       </div>
     </div>

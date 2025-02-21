@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON格式化 - E事无忧</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header>
+    <h1>E事无忧</h1>
+    <p>一站式在线工具平台</p>
+  </header>
+  <nav>
+    <a href="../index.html">首页</a>
+    <a href="../tools.html">工具</a>
+    <a href="../contact.html">联系我们</a>
+  </nav>
+  <main>
+    <h2>JSON格式化</h2>
+    <p>格式化JSON文本：</p>
+    <div class="tool-container">
+      <div class="tool-item">
+        <div class="tool-title">JSON格式化</div>
+        <div class="tool-description">格式化JSON文本</div>
+        <textarea id="jsonInput" placeholder="输入JSON文本"></textarea>
+        <button onclick="formatJSON()">格式化</button>
+        <pre id="jsonOutput"></pre>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2025 E事无忧. All rights reserved. <a href="http://wapmz.com/in/205"><img src="http://wapmz.com/cn/small/205" alt="wapmz.com"></a></p>
+  </footer>
+  <script>
+    function formatJSON() {
+      try {
+        const jsonText = document.getElementById('jsonInput').value;
+        const jsonObject = JSON.parse(jsonText);
+        const formattedJSON = JSON.stringify(jsonObject, null, 2);
+        document.getElementById('jsonOutput').textContent = formattedJSON;
+      } catch (error) {
+        document.getElementById('jsonOutput').textContent = '无效的JSON文本';
+      }
+    }
+  </script>
+</body>
+</html>

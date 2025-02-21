@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>字数统计 - E事无忧</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header>
+    <h1>E事无忧</h1>
+    <p>一站式在线工具平台</p>
+  </header>
+  <nav>
+    <a href="../index.html">首页</a>
+    <a href="../tools.html">工具</a>
+    <a href="../contact.html">联系我们</a>
+  </nav>
+  <main>
+    <h2>字数统计</h2>
+    <p>输入文本统计字数和字符数：</p>
+    <textarea id="textInput" placeholder="输入文本"></textarea>
+    <button onclick="countWords()">统计字数</button>
+    <p>字数：<span id="wordCount">0</span></p>
+    <p>字符数：<span id="charCount">0</span></p>
+  </main>
+  <footer>
+    <p>&copy; 2025 E事无忧. All rights reserved.</p>
+  </footer>
+  <script>
+    function countWords() {
+      const text = document.getElementById('textInput').value;
+      const words = text.trim().split(/\s+/).filter(word => word.length > 0);
+      document.getElementById('wordCount').innerText = words.length;
+      document.getElementById('charCount').innerText = text.length;
+    }
+  </script>
+</body>
+</html>
